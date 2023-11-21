@@ -13,9 +13,11 @@ import java.util.ArrayList;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
+    /*user detail service deer hereglegchee ugugdliin
+     sangaas haij UserDetail-d huvirgaj bucaadag*/
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-
 
         return new User("foo", "foo", new ArrayList<>());
     }

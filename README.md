@@ -1,2 +1,2 @@
-# JWT-Authentication Spring boot
+# Spring boot web security using jwt
 used java web token

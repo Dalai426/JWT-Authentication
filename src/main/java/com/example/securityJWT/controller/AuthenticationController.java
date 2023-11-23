@@ -5,18 +5,14 @@ import com.example.securityJWT.models.AuthenticationRequest;
 import com.example.securityJWT.models.AuthenticationResponse;
 import com.example.securityJWT.models.RegisterRequest;
 import com.example.securityJWT.services.AuthenticationService;
-import com.example.securityJWT.services.MyUserDetailsService;
-import com.example.securityJWT.util.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -37,7 +33,12 @@ public class AuthenticationController {
         try {
             return ResponseEntity.ok(authenticationService.authenticate(authenticationRequest));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthenticationResponse(e.getMessage()));
+            throw e;
         }
+    }
+
+    @RequestMapping(value = "/refreshToken", method = RequestMethod.POST)
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        authenticationService.refreshToken(request, response);
     }
 }

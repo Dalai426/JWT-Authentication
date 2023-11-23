@@ -1,6 +1,5 @@
 package com.example.securityJWT.models;
 
-public enum Role {
-    DEMO,
-    ADMIN
+public enum TokenType {
+    BEARER
 }
